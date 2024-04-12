@@ -1,0 +1,126 @@
+.header {
+  position: relative;
+}
+
+.nav {
+  height: 88px;
+  padding: 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.menu {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.menuItemBtn {
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.menuBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    color: var(--active-color-black);
+  }
+}
+
+.wrapperBtn {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 16px;
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.btnLogin {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 14px 0px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btnLogin:hover,
+.btnLogin:active {
+  color: var(--active-color-black);
+}
+
+.btnRegistration {
+  padding: 14px 39px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--primary-color-black);
+  color: var(--primary-color-white);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btnRegistration:hover,
+.btnRegistration:active {
+  background-color: var(--active-color-black);
+}
+
+.burgerMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .menu {
+    position: fixed;
+    left: -100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--primary-color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: 100vh;
+    list-style: none;
+    z-index: 2000;
+    font-size: 24px;
+    transition: left 500ms;
+  }
+
+  .isShowMenu {
+    left: 0;
+  }
+
+  .burgerMenu {
+    display: block;
+    color: var(--primary-color-black);
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 50px;
+    top: 32px;
+    z-index: 2001;
+  }
+}

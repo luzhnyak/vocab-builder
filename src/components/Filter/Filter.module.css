@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.languagesWrapper {
+  width: 221px;
+}
+
+.levelWrapper {
+  width: 198px;
+}
+
+.priceWrapper {
+  width: 124px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #8a8a89;
+  font-size: 14px;
+  font-weight: 500;
+}

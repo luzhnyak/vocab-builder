@@ -1,0 +1,20 @@
+.btn {
+  display: block;
+  cursor: pointer;
+  width: 183px;
+  margin-top: 22px;
+  padding: 16px;
+  margin: 64px auto;
+  background: var(--primary-color-fon);
+  border: none;
+  border-radius: 12px;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.btn:hover,
+.btn:active {
+  background: var(--secondary-color-fon);
+}

@@ -1,0 +1,70 @@
+:root {
+  --primary-color-black: #121417;
+  --active-color-black: rgba(18, 20, 23, 0.7);
+  --backdrop-color-black: rgba(18, 20, 23, 0.5);
+  --primary-color-white: #ffffff;
+  --primary-color-background: #f8f8f8;
+  --primary-color-fon: #9fb7ce;
+  --secondary-color-fon: #bfd6ea;
+}
+
+body {
+  font-family: Roboto;
+  font-size: 16px;
+  color: var(--primary-color-black);
+  background-color: var(--primary-color-background);
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary-color-black);
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  color: var(--active-color-black);
+}
+
+a.active {
+  color: var(--active-color-black);
+}
+
+.container {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.btn {
+  padding: 14px 39px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--primary-color-fon);
+  color: var(--primary-color-fon);
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color-fon);
+  outline: none;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--primary-color-fon);
+  background-clip: content-box;
+  padding: 2px;
+}
+
+.body-scroll-lock {
+  overflow: hidden;
+}
