@@ -2,11 +2,12 @@ import { FC, useState } from "react";
 import css from "./Form.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as yup from "yup";
-import eye from "../../images/eye.svg";
-import eyeOff from "../../images/eye-off.svg";
+import eye from "../../icons/eye.svg";
+import eyeOff from "../../icons/eye-off.svg";
 
 import { useAuth } from "../../store";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
@@ -41,8 +42,7 @@ const LoginForm: FC = () => {
     <div className={css.wrapper}>
       <h3 className={css.title}>Login</h3>
       <p className={css.text}>
-        Welcome back! Please enter your credentials to access your account and
-        continue your search for an teacher.
+        Please enter your login details to continue using our service:
       </p>
       <Formik
         initialValues={initialValues}
@@ -94,6 +94,9 @@ const LoginForm: FC = () => {
           </Form>
         )}
       </Formik>
+      <Link className={css.register} to="/register">
+        Register
+      </Link>
     </div>
   );
 };

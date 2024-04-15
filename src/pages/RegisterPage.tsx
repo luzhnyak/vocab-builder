@@ -1,9 +1,12 @@
 import RegisterForm from "../components/Forms/RegisterForm";
+import Hero from "../components/Hero/Hero";
 
 const RegisterPage = () => {
   return (
-    <main>
-      <RegisterForm />
+    <main className="container">
+      <Hero>
+        <RegisterForm />
+      </Hero>
     </main>
   );
 };

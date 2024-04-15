@@ -1,10 +1,14 @@
 :root {
+  --primary-color: #85aa9f;
+  --primary-color-akcent: #a5c0b8;
+  --primary-color-fon: rgba(133, 170, 159, 0.1);
+
   --primary-color-black: #121417;
   --active-color-black: rgba(18, 20, 23, 0.7);
   --backdrop-color-black: rgba(18, 20, 23, 0.5);
   --primary-color-white: #ffffff;
   --primary-color-background: #f8f8f8;
-  --primary-color-fon: #9fb7ce;
+
   --secondary-color-fon: #bfd6ea;
 }
 
@@ -31,7 +35,7 @@ a.active {
 }
 
 .container {
-  max-width: 1344px;
+  max-width: 1276px;
   margin: 0 auto;
   padding: 0 16px;
 }

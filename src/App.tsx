@@ -12,12 +12,12 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
-        <Route
+        {/* <Route
           index
           element={<PrivateRoute component={<HomePage />} redirectTo="/" />}
-        />
+        /> */}
         <Route index element={<LoginPage />}></Route>
-        <Route index element={<RegisterPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

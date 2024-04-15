@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import css from "./Header.module.css";
 
-// import Logo from "./icons/logo.svg";
+import logo from "../../icons/logo.svg";
 
 import { useState } from "react";
 
@@ -19,10 +19,11 @@ const Header = () => {
   return (
     <header className={`container ${css.header}`}>
       <nav className={css.nav}>
-        <NavLink className={css.logo} to="/">
+        <Link className={css.logo} to="/">
           {/* <Logo /> */}
+          <img className={css.logoImg} src={logo} />
           VocabBuilder
-        </NavLink>
+        </Link>
         <ul
           className={
             isOpenMenu ? [css.menu, css.isShowMenu].join(" ") : css.menu

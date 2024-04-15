@@ -2,79 +2,31 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 0 24px 0;
+  margin: 0 0 0 0;
   gap: 24px;
   align-items: stretch;
   list-style: none;
 }
 
 .itemLeft {
-  padding: 98px 64px;
+  padding: 0;
   flex: 1;
-  width: 720px;
-  background-color: #f8f8f8;
-  border-radius: 30px;
-  @media only screen and (max-width: 767px) {
+  /* @media only screen and (max-width: 767px) {
     padding: 48px 24px;
-  }
-}
-
-.title {
-  font-size: 48px;
-  font-weight: 500;
-  margin-bottom: 32px;
-}
-
-.italic {
-  font-style: italic;
-  font-weight: 400;
-  padding: 0 6px;
-  letter-spacing: -0.02em;
-  background-image: url("../../images/italic-fon.svg");
-  background-position: center bottom 6px;
-  background-repeat: no-repeat;
+  } */
 }
 
 .text {
-  width: 471px;
-  margin-bottom: 64px;
-  line-height: 22px;
-  @media only screen and (max-width: 599px) {
+  width: 100%;
+  margin-top: 16px;
+  line-height: 24px;
+  text-align: center;
+  /* @media only screen and (max-width: 599px) {
     width: 100%;
-  }
+  } */
 }
 
 .itemRight {
   width: 100%;
   flex: 1;
-  min-width: 280px;
-  min-height: 480px;
-  background-color: #bfd6ea;
-  background-image: url("../../images/sticker.png");
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  border-radius: 30px;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 267px;
-  height: 60px;
-  background-color: var(--primary-color-fon);
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--primary-color-black);
-  @media only screen and (max-width: 475px) {
-    width: 100%;
-  }
-}
-
-.btn:hover,
-.btn:active {
-  background-color: var(--secondary-color-fon);
 }

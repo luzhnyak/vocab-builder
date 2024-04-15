@@ -2,10 +2,11 @@ import { FC, useState } from "react";
 import css from "./Form.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as yup from "yup";
-import eye from "../../images/eye.svg";
-import eyeOff from "../../images/eye-off.svg";
+import eye from "../../icons/eye.svg";
+import eyeOff from "../../icons/eye-off.svg";
 import { toast } from "react-toastify";
 import { useAuth } from "../../store";
+import { Link } from "react-router-dom";
 
 const registerSchema = yup.object({
   name: yup.string().min(2).required(),
@@ -43,8 +44,8 @@ const RegisterForm: FC = () => {
     <div className={css.wrapper}>
       <h3 className={css.title}>Register</h3>
       <p className={css.text}>
-        Thank you for your interest in our platform! In order to register, we
-        need some information. Please provide us with the following information.
+        To start using our services, please fill out the registration form
+        below. All fields are mandatory:
       </p>
 
       <Formik
@@ -111,6 +112,9 @@ const RegisterForm: FC = () => {
           </Form>
         )}
       </Formik>
+      <Link className={css.register} to="/login">
+        Login
+      </Link>
     </div>
   );
 };

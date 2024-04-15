@@ -1,25 +1,17 @@
 import { Link } from "react-router-dom";
 import css from "./Hero.module.css";
+import heroImg from "../../images/illustration.png";
+import { FC, PropsWithChildren } from "react";
 
-const Hero = () => {
+const Hero: FC<PropsWithChildren> = ({ children }) => {
   return (
     <section className={css.wrapper}>
       <ul className={css.list}>
-        <li className={css.itemLeft}>
-          <h1 className={css.title}>
-            Unlock your potential with the best{" "}
-            <span className={css.italic}>language</span> tutors
-          </h1>
-          <p className={css.text}>
-            Embark on an Exciting Language Journey with Expert Language Tutors:
-            Elevate your language proficiency to new heights by connecting with
-            highly qualified and experienced tutors.
-          </p>
-          <Link className={css.btn} to="teachers">
-            Get started
-          </Link>
+        <li className={css.itemLeft}>{children}</li>
+        <li className={css.itemRight}>
+          <img src={heroImg} alt="Vocab Builder" />
+          <p className={css.text}>Word · Translation · Grammar · Progress</p>
         </li>
-        <li className={css.itemRight}></li>
       </ul>
     </section>
   );
