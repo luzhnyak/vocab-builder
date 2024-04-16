@@ -22,7 +22,7 @@ const Header = () => {
         <Link className={css.logo} to="/">
           {/* <Logo /> */}
           <img className={css.logoImg} src={logo} />
-          VocabBuilder
+          <span className={css.logoText}>VocabBuilder</span>
         </Link>
         <ul
           className={
@@ -31,6 +31,7 @@ const Header = () => {
         >
           <li className={css.menuItem}>
             <NavLink
+              className={css.menuLink}
               to="/dictionary"
               onClick={() => {
                 setIsOpenMenu(!isOpenMenu);
@@ -41,6 +42,7 @@ const Header = () => {
           </li>
           <li className={css.menuItem}>
             <NavLink
+              className={css.menuLink}
               to="/recomend"
               onClick={() => {
                 setIsOpenMenu(!isOpenMenu);
@@ -52,6 +54,7 @@ const Header = () => {
 
           <li className={css.menuItem}>
             <NavLink
+              className={css.menuLink}
               to="/training"
               onClick={() => {
                 setIsOpenMenu(!isOpenMenu);

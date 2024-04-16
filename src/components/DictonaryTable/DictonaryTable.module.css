@@ -1,0 +1,34 @@
+.table {
+  width: 100%;
+  border: 18px solid white;
+  border-radius: 15px;
+  /* background-color: #dbdbdb; */
+}
+
+.headRow {
+  background-color: #f3f7f6;
+
+  th {
+    padding: 22px;
+  }
+  :not(:first-child) {
+    border-left: 1px solid #dbdbdb;
+  }
+}
+
+.bodyRow {
+  background-color: #fcfcfc;
+
+  td {
+    border-top: 1px solid #dbdbdb;
+
+    padding: 22px;
+  }
+  :not(:first-child) {
+    border-left: 1px solid #dbdbdb;
+  }
+}
+
+.cell {
+  padding: 22px;
+}

@@ -3,6 +3,9 @@ import { lazy } from "react";
 
 import { SharedLayout } from "./components/SharedLayout";
 import { PrivateRoute } from "./pages/PrivateRoute";
+import RecommendPage from "./pages/RecommendPage";
+import TrainingPage from "./pages/TrainingPage";
+import DictonaryPage from "./pages/DictonaryPage";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -18,6 +21,9 @@ const App = () => {
         /> */}
         <Route index element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/dictionary" element={<DictonaryPage />}></Route>
+        <Route path="/recomend" element={<RecommendPage />}></Route>
+        <Route path="/training" element={<TrainingPage />}></Route>
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

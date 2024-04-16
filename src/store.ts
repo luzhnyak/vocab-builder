@@ -17,7 +17,7 @@ export const useAuth = create<AuthState>()(
     persist(
       (set) => ({
         currentUser: null,
-        isLogin: false,
+        isLogin: true,
         login: (user) => set(() => ({ currentUser: user, isLogin: true })),
         logout: () => set(() => ({ currentUser: null, isLogin: false })),
       }),
