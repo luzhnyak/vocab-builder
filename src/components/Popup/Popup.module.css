@@ -1,0 +1,43 @@
+.wrapper {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 12px 24px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary-color-black);
+}
+
+.btn:hover,
+.btn:active {
+  color: var(--active-color-black);
+}
+
+.btnIcon {
+  color: var(--primary-color);
+}
+
+.btnIcon:hover,
+.btnIcon:active {
+  color: var(--primary-color-akcent);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

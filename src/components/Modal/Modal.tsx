@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useRef } from "react";
 import css from "./Modal.module.css";
-import closeIcon from "../../images/x.svg";
+import closeIcon from "../../icons/x.svg";
 import { createPortal } from "react-dom";
 
 const modalRoot: Element | null = document.querySelector("#root-modal");

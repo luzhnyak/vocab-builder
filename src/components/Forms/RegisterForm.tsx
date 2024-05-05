@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as yup from "yup";
 import eye from "../../icons/eye.svg";
 import eyeOff from "../../icons/eye-off.svg";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useAuth } from "../../store";
 import { Link } from "react-router-dom";
 
@@ -29,14 +29,17 @@ const initialValues: SubmitValues = {
 const RegisterForm: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login } = useAuth((state) => ({
-    login: state.login,
+  const { signup } = useAuth((state) => ({
+    signup: state.signup,
   }));
 
   const handleSubmit = async (
     values: SubmitValues,
     { resetForm }: FormikHelpers<SubmitValues>
   ) => {
+    const data = signup(values);
+    console.log(data);
+
     resetForm();
   };
 

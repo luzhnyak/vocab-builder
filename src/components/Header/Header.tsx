@@ -6,6 +6,8 @@ import logo from "../../icons/logo.svg";
 import { useState } from "react";
 
 import { useAuth } from "../../store";
+import { FaArrowRight } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -68,10 +70,13 @@ const Header = () => {
           {isLogin && currentUser?.name && (
             <>
               <h3>{currentUser.name}</h3>
-              {/* <button className={css.btnLogin} onClick={() => logout()}>
-                <img src={logIn} alt="Log In" width={20} height={20} />
+              <div className={css.userIcon}>
+                <FaUser width={24} height={24} />
+              </div>
+              <button className={css.btnLogout} onClick={() => logout()}>
                 Log Out
-              </button> */}
+                <FaArrowRight width={16} height={16} />
+              </button>
             </>
           )}
         </div>

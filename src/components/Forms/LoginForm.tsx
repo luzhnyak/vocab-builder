@@ -6,7 +6,7 @@ import eye from "../../icons/eye.svg";
 import eyeOff from "../../icons/eye-off.svg";
 
 import { useAuth } from "../../store";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const loginSchema = yup.object({
@@ -27,14 +27,15 @@ const initialValues: SubmitValues = {
 const LoginForm: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login } = useAuth((state) => ({
-    login: state.login,
+  const { signin } = useAuth((state) => ({
+    signin: state.signin,
   }));
 
   const handleSubmit = async (
     values: SubmitValues,
     { resetForm }: FormikHelpers<SubmitValues>
   ) => {
+    signin(values);
     resetForm();
   };
 

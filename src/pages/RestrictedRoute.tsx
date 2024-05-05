@@ -7,13 +7,13 @@ interface IProps {
   redirectTo: string;
 }
 
-export const PrivateRoute: FC<IProps> = ({
+export const RestrictedRoute: FC<IProps> = ({
   component: Component,
-  redirectTo = "/signin",
+  redirectTo = "/home",
 }) => {
   const { isLogin } = useAuth((state) => ({
     isLogin: state.isLogin,
   }));
 
-  return !isLogin ? <Navigate to={redirectTo} /> : Component;
+  return isLogin ? <Navigate to={redirectTo} /> : Component;
 };

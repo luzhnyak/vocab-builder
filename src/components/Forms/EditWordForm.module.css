@@ -1,28 +1,14 @@
-.wrapper {
-  width: 628px;
-  /* height: 592px; */
-  background-color: var(--primary-color-fon);
-  padding: 48px 64px;
-  border-radius: 30px;
-  /* @media only screen and (max-width: 767px) {
-    width: 400px;
-  }
-  @media only screen and (max-width: 475px) {
-    width: 100%;
-  } */
-}
-
 .modalWrapper {
   width: 500px;
 }
 
 .title {
   margin: 0 0 20px 0;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 40px;
   line-height: 48px;
   letter-spacing: -0.02em;
-  color: var(--primary-color-black);
+  color: var(--primary-color-white);
 }
 
 .text {
@@ -37,6 +23,11 @@
 
 .inputWrapper {
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  align-items: center;
+  color: var(--primary-color-white);
 }
 
 .inputWrapper:not(:last-child) {
@@ -44,13 +35,16 @@
 }
 
 .input {
+  display: block;
   padding: 16px 18px;
   box-sizing: border-box;
-  color: var(--primary-color-black);
-  width: 100%;
-  height: 54px;
-  border: 1px solid rgba(18, 20, 23, 0.1);
-  border-radius: 12px;
+  color: var(--primary-color-white);
+  background-color: transparent;
+  width: 354px;
+  height: 56px;
+  border: 1px solid var(--primary-color-akcent);
+  border-radius: 15px;
+  margin-right: 24px;
 }
 
 .inputError {
@@ -108,18 +102,22 @@
   color: var(--primary-color-fon);
 }
 
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+}
+
 .btn {
   cursor: pointer;
   width: 100%;
-  margin-top: 22px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
-
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-white);
   border: none;
-  border-radius: 12px;
+  border-radius: 30px;
 
   font-size: 18px;
   font-weight: 600;
@@ -128,7 +126,31 @@
 
 .btn:hover,
 .btn:active {
-  background: var(--primary-color-akcent);
+  color: var(--primary-color-akcent);
+}
+
+.btnCancel {
+  cursor: pointer;
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background-color: transparent;
+  color: var(--primary-color-white);
+  border-radius: 30px;
+  border: 1px solid var(--primary-color-akcent);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.btnCancel:hover,
+.btnCancel:active {
+  color: var(--primary-color-black);
+  background-color: var(--primary-color-white);
+  /* border: none; */
 }
 
 .register {

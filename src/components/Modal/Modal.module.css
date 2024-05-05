@@ -9,10 +9,9 @@
 }
 
 .modal {
-  background-color: var(--primary-color-white);
+  background-color: var(--primary-color);
   border-radius: 30px;
-
-  padding: 64px;  
+  padding: 48px 64px;
   min-width: 280px;
   min-height: 100px;
   left: 50%;

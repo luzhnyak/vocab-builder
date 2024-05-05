@@ -11,8 +11,18 @@
   th {
     padding: 22px;
   }
+
   :not(:first-child) {
     border-left: 1px solid #dbdbdb;
+  }
+}
+
+.thWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  :last-child {
+    border: none;
   }
 }
 
@@ -21,14 +31,58 @@
 
   td {
     border-top: 1px solid #dbdbdb;
-
+    border-left: 1px solid #dbdbdb;
     padding: 22px;
   }
-  :not(:first-child) {
-    border-left: 1px solid #dbdbdb;
+  :first-child {
+    border-left: none;
   }
+}
+
+.lastTd {
+  display: flex;
+  justify-content: center;
 }
 
 .cell {
   padding: 22px;
+}
+
+.popupWrapper {
+  position: relative;
+}
+
+.btnPopup {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--backdrop-color-black);
+}
+
+.btnPopup:hover,
+.btnPopup:active {
+  color: var(--primyry-color-black);
+}
+
+.btnAdd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color-black);
+}
+
+.btnAdd:hover,
+.btnAdd:active {
+  color: var(--backdrop-color-black);
+}
+
+.btnAddIcon {
+  color: var(--primary-color);
 }
