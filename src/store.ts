@@ -3,10 +3,11 @@ import { devtools, persist } from "zustand/middleware";
 
 import { IUser, IWord } from "./types";
 import {
-  addWord,
-  createWord,
+  // addWord,
+  // createWord,
   currentUser,
-  editWord,
+  // deleteWord,
+  // editWord,
   getAllWords,
   getOwnWords,
   getWordsCategories,
@@ -33,22 +34,18 @@ export const useAuth = create<AuthState>()(
         isLogin: true,
         signup: async (user) => {
           const data = await signup(user);
-
           set(() => ({ currentUser: data, isLogin: true }));
         },
         signin: async (user) => {
           const data = await signin(user);
-
           set(() => ({ currentUser: data, isLogin: true }));
         },
         logout: async () => {
           await logout();
-
           set(() => ({ currentUser: null, isLogin: false }));
         },
         getCurrentUser: async () => {
           const data = await currentUser();
-
           set(() => ({ currentUser: data, isLogin: true }));
         },
       }),
@@ -62,10 +59,11 @@ interface WordsState {
   allWords: { results: IWord[] } | null;
   ownWords: { results: IWord[] } | null;
 
-  getWordsCategiries: () => void;
-  createWord: (word: IWord) => void;
-  addWord: (id: string) => void;
-  editWord: (id: string, word: IWord) => void;
+  getWordsCategories: () => void;
+  // createWord: (word: IWordCreate) => void;
+  // addWord: (id: string) => void;
+  // deleteWord: (id: string) => void;
+  // editWord: (id: string, word: IWordCreate) => void;
   getAllWords: () => void;
   getOwnWords: () => void;
 }
@@ -77,34 +75,29 @@ export const useWords = create<WordsState>()(
       allWords: null,
       ownWords: null,
 
-      getWordsCategiries: async () => {
+      getWordsCategories: async () => {
         const data = await getWordsCategories();
-
         set(() => ({ categories: data }));
       },
-      createWord: async (word) => {
-        const data = await createWord(word);
-
-        set(() => ({ ownWords: data }));
-      },
-      addWord: async (id) => {
-        const data = await addWord(id);
-
-        set(() => ({ ownWords: data }));
-      },
-      editWord: async (id, word) => {
-        const data = await editWord(id, word);
-
-        set(() => ({ ownWords: data }));
-      },
+      // createWord: async (word) => {
+      //   await createWord(word);
+      //   await getOwnWords();
+      // },
+      // addWord: async (id) => {
+      //   await addWord(id);
+      // },
+      // deleteWord: async (id) => {
+      //   await deleteWord(id);
+      // },
+      // editWord: async (id, word) => {
+      //   await editWord(id, word);
+      // },
       getAllWords: async () => {
         const data = await getAllWords();
-
         set(() => ({ allWords: data }));
       },
       getOwnWords: async () => {
         const data = await getOwnWords();
-
         set(() => ({ ownWords: data }));
       },
     }),

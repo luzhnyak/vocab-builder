@@ -15,7 +15,8 @@
   margin: 0 0 32px 0;
   line-height: 30px;
   font-size: 20px;
-  color: rgba(18, 20, 23, 0.8);
+  color: var(--primary-color-white);
+  font-weight: 400;
   @media only screen and (max-width: 475px) {
     margin: 0 0 20px 0;
   }
@@ -83,11 +84,27 @@
   line-height: 32px;
 }
 
+.select {
+  width: 204px;
+  height: 48px;
+  background-color: transparent;
+  border: 1px solid var(--primary-color-akcent);
+  color: var(--primary-color-white);
+  padding: 12px 24px;
+  border-radius: 15px;
+}
+
+.radioGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
 .radioWrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
 }
 .radioWrapper label {
   cursor: pointer;
@@ -99,7 +116,7 @@
   height: 24px;
   font-size: 16px;
   line-height: 22px;
-  color: var(--primary-color-fon);
+  color: var(--primary-color-white);
 }
 
 .btnWrapper {

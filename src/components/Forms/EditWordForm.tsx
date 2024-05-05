@@ -7,6 +7,8 @@ import imgUk from "../../icons/uk.svg";
 import imgUa from "../../icons/ua.svg";
 import { Controller } from "react-hook-form";
 import { FC } from "react";
+import { useWords } from "../../store";
+import { editWord } from "../../services/vocabApi";
 
 type Inputs = {
   en: string;
@@ -22,10 +24,23 @@ interface IProps {
   id: string;
   en: string;
   ua: string;
+  category: string;
+  isIrregular: boolean;
   onClose: () => void;
 }
 
-const EditWordForm: FC<IProps> = ({ id, en, ua, onClose }) => {
+const EditWordForm: FC<IProps> = ({
+  id,
+  en,
+  ua,
+  category,
+  isIrregular,
+  onClose,
+}) => {
+  const { getOwnWords } = useWords((state) => ({
+    getOwnWords: state.getOwnWords,
+  }));
+
   const {
     control,
     handleSubmit,
@@ -39,8 +54,9 @@ const EditWordForm: FC<IProps> = ({ id, en, ua, onClose }) => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await editWord(id, { en: data.en, ua: data.ua, category, isIrregular });
+    getOwnWords();
     onClose();
   };
 

@@ -14,3 +14,10 @@ export interface IWord {
   progress: number;
   isIrregular: boolean;
 }
+
+export interface IWordCreate {
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular?: boolean;
+}

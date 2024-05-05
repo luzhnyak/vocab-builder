@@ -11,6 +11,7 @@ const DictonaryTable = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idWord, setIdWord] = useState<string | null>(null);
+
   const { ownWords, getOwnWords } = useWords((state) => ({
     ownWords: state.ownWords,
     getOwnWords: state.getOwnWords,
@@ -48,42 +49,46 @@ const DictonaryTable = () => {
           </tr>
         </thead>
         <tbody>
-          {ownWords?.results.map((word) => {
-            return (
-              <tr className={css.bodyRow} key={word._id}>
-                <td>{word.en}</td>
-                <td>{word.ua}</td>
-                <td>{word.category}</td>
-                <td> {word.progress} %</td>
-                <td className={css.lastTd}>
-                  <button
-                    className={css.btnPopup}
-                    onClick={() => handlePopupClick(word._id)}
-                  >
-                    ...
-                  </button>
-                  <div className={css.popupWrapper}>
-                    {showPopup && idWord === word._id && (
-                      <Popup
-                        setShowEditModal={setShowEditModal}
-                        onClose={() => setShowPopup(false)}
-                      />
+          {ownWords?.results &&
+            ownWords?.results.map((word) => {
+              return (
+                <tr className={css.bodyRow} key={word._id}>
+                  <td>{word.en}</td>
+                  <td>{word.ua}</td>
+                  <td>{word.category}</td>
+                  <td> {word.progress} %</td>
+                  <td className={css.lastTd}>
+                    <button
+                      className={css.btnPopup}
+                      onClick={() => handlePopupClick(word._id)}
+                    >
+                      ...
+                    </button>
+                    <div className={css.popupWrapper}>
+                      {showPopup && idWord === word._id && (
+                        <Popup
+                          setShowEditModal={setShowEditModal}
+                          onClose={() => setShowPopup(false)}
+                          id={word._id}
+                        />
+                      )}
+                    </div>
+                    {showEditModal && idWord === word._id && (
+                      <Modal onClose={setShowEditModal}>
+                        <EditWordForm
+                          onClose={() => setShowEditModal(false)}
+                          id={word._id}
+                          en={word.en}
+                          ua={word.ua}
+                          category={word.category}
+                          isIrregular={word.isIrregular}
+                        />
+                      </Modal>
                     )}
-                  </div>
-                  {showEditModal && idWord === word._id && (
-                    <Modal onClose={setShowEditModal}>
-                      <EditWordForm
-                        onClose={() => setShowEditModal(false)}
-                        id={word._id}
-                        en={word.en}
-                        ua={word.ua}
-                      />
-                    </Modal>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

@@ -4,11 +4,11 @@ import ua from "../../icons/ua.svg";
 import { useWords } from "../../store";
 import { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { addWord } from "../../services/vocabApi";
 
 const RecommendTable = () => {
-  const { allWords, getAllWords, addWord } = useWords((state) => ({
+  const { allWords, getAllWords } = useWords((state) => ({
     allWords: state.allWords,
-    addWord: state.addWord,
     getAllWords: state.getAllWords,
   }));
 

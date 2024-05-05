@@ -1,5 +1,6 @@
-import axios from "axios";
-import { IUser, IWord } from "../types";
+import axios, { AxiosError } from "axios";
+import { IUser, IWord, IWordCreate } from "../types";
+import { showError } from "./showError";
 
 axios.defaults.baseURL = "https://vocab-builder-backend.p.goit.global/api";
 
@@ -14,12 +15,11 @@ export const clearToken = () => {
 export const signin = async ({ email, password }: IUser) => {
   try {
     const { data } = await axios.post("/users/signin", { email, password });
-
     setToken(data.token);
 
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -35,7 +35,7 @@ export const signup = async ({ name, email, password }: IUser) => {
 
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -47,9 +47,8 @@ export const logout = async () => {
 
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
-  console.log("logout");
 };
 
 export const currentUser = async () => {
@@ -58,7 +57,7 @@ export const currentUser = async () => {
 
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -67,16 +66,16 @@ export const getWordsCategories = async () => {
     const { data } = await axios.get("/words/categories");
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
-export const createWord = async (word: IWord) => {
+export const createWord = async (word: IWordCreate) => {
   try {
     const { data } = await axios.post("/words/create", word);
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -85,16 +84,16 @@ export const addWord = async (id: string) => {
     const { data } = await axios.post(`/words/add/${id}`);
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
-export const editWord = async (id: string, word: IWord) => {
+export const editWord = async (id: string, word: IWordCreate) => {
   try {
-    const { data } = await axios.patch(`/words/add/${id}`, word);
+    const { data } = await axios.patch(`/words/edit/${id}`, word);
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -103,7 +102,7 @@ export const getAllWords = async () => {
     const { data } = await axios.get("/words/all");
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -112,7 +111,7 @@ export const getOwnWords = async () => {
     const { data } = await axios.get("/words/own");
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -121,7 +120,7 @@ export const deleteWord = async (id: string) => {
     const { data } = await axios.delete(`/words/delete/${id}`);
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -130,7 +129,7 @@ export const getStatistics = async () => {
     const { data } = await axios.get("/words/statistics");
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -139,7 +138,7 @@ export const getTasks = async () => {
     const { data } = await axios.get("/words/tasks");
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };
 
@@ -148,6 +147,6 @@ export const addAnswer = async (answer: IWord) => {
     const { data } = await axios.post(`/words/answers`, answer);
     return data;
   } catch (error) {
-    console.error("Помилка запиту:", error);
+    showError(error as AxiosError);
   }
 };

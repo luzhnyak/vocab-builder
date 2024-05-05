@@ -7,7 +7,7 @@
   --primary-color-black: #121417;
   --active-color-black: rgba(18, 20, 23, 0.7);
   --backdrop-color-black: rgba(18, 20, 23, 0.5);
-  --primary-color-white: #ffffff;
+  --primary-color-white: #fcfcfc;
 
   --secondary-color-fon: #bfd6ea;
 }
@@ -48,11 +48,6 @@ a.active {
   cursor: pointer;
 }
 
-input[type="radio"]:checked {
-  background-color: var(--primary-color-fon);
-  color: var(--primary-color-fon);
-}
-
 input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -60,16 +55,30 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--primary-color-fon);
+  border: 2px solid var(--primary-color-akcent);
   outline: none;
+  box-sizing: border-box;
 }
 
 input[type="radio"]:checked {
-  background-color: var(--primary-color-fon);
+  background-color: var(--primary-color-white);
+  color: var(--primary-color-white);
+  border: 2px solid var(--primary-color-white);
   background-clip: content-box;
-  padding: 2px;
+  padding: 3px;
 }
 
 .body-scroll-lock {
   overflow: hidden;
+}
+
+/* Стилі для опцій у випадаючому списку */
+select option {
+  background-color: var(--primary-color);
+  color: var(--primary-color-white);
+}
+
+/* Стилі для опції при наведенні */
+select option:hover {
+  background-color: var(--primary-color-akcent);
 }
