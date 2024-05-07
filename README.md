@@ -1,28 +1,24 @@
-# Learn Lingo
+# Vocab Builder
 
 ![Main page screenshot](/public/screenshot_main.jpg)
 
 ## Description
 
-This project entails creating a web application for finding language teachers online. It offers users the ability to browse through a curated list of teachers, manage their favorites, and request appointments. The application comprises three main pages: Home, Teachers, and Favorites.
+Vocab Builder is an application for those who want to learn a foreign language on their own. This application will allow you to add words you like, create new ones and correct them. In the application you can also take training on learning words.
 
-[Frontend](https://github.com/luzhnyak/learn-lingo)
-[Live page](https://luzhnyak.github.io/learn-lingo/)
+This is a three-page site with login and registration options. If the user is registered, he has the ability to add and remove favorites! In the “Dictionary” section there is a list of your words with the ability to filter them, and you can also correct and delete words from your list. In the “Recomend” section there is a list of words that you can add to your list for study; there is also the ability to filter words, which will allow you to find words that are suitable for you. In the “Training” section, you can test yourself on your knowledge of words from your list; you will be shown the percentage of words you have learned.
 
-## Pages
-
-- **Home Page:** displays the title, slogan, a prominent link to begin using the application, and the option to log in or register.
-- **Teachers Page:** users can browse teachers sorted by criteria like alphabetical order, price, and popularity. Cards display essential details about each teacher, with the option to load more for further exploration and making an appointment.
-- **Favorites Page:** authenticated users have access to a private page where they can manage teachers marked as favorites, mirroring the style of the Teachers page.
+[Frontend](https://github.com/luzhnyak/vocab-builder)
+[Live page](https://luzhnyak.github.io/vocab-builder/)
 
 ## Technologies Used
 
-`HTML/CSS` `TypeScript` `React` `React Router` `Axios` `React Toastify` `Formik & Yup` `Responsive design` `Firebase` `Zustand`
+`HTML/CSS` `TypeScript` `React` `React Router` `Axios` `React Toastify` `React hook form & Yup` `Responsive design` `Zustand`
 
 ## Website layout
 
 You can view the website design
-[ here](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/Learn-Lingo)
+[ here](https://www.figma.com/file/XRhVBdCX1wPyzCRA567kud/VocabBuilder
 
 ## Contributors
 
