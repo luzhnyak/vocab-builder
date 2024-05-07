@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { IUser, IWord, IWordCreate } from "../types";
+import { Answer, IUser, IWordCreate, SearchParams } from "../types";
 import { showError } from "./showError";
 
 axios.defaults.baseURL = "https://vocab-builder-backend.p.goit.global/api";
@@ -97,18 +97,34 @@ export const editWord = async (id: string, word: IWordCreate) => {
   }
 };
 
-export const getAllWords = async () => {
+export const getAllWords = async (params: SearchParams) => {
   try {
-    const { data } = await axios.get("/words/all");
+    for (const key in params) {
+      if (!params[key]) {
+        delete params[key];
+      }
+    }
+    const searchParams = new URLSearchParams({ ...params });
+    const queryString = searchParams.toString();
+
+    const { data } = await axios.get("/words/all?" + queryString);
     return data;
   } catch (error) {
     showError(error as AxiosError);
   }
 };
 
-export const getOwnWords = async () => {
+export const getOwnWords = async (params: SearchParams) => {
   try {
-    const { data } = await axios.get("/words/own");
+    for (const key in params) {
+      if (!params[key]) {
+        delete params[key];
+      }
+    }
+    const searchParams = new URLSearchParams({ ...params });
+    const queryString = searchParams.toString();
+
+    const { data } = await axios.get(`/words/own?` + queryString);
     return data;
   } catch (error) {
     showError(error as AxiosError);
@@ -142,9 +158,9 @@ export const getTasks = async () => {
   }
 };
 
-export const addAnswer = async (answer: IWord) => {
+export const addAnswer = async (answers: Answer[]) => {
   try {
-    const { data } = await axios.post(`/words/answers`, answer);
+    const { data } = await axios.post(`/words/answers`, answers);
     return data;
   } catch (error) {
     showError(error as AxiosError);

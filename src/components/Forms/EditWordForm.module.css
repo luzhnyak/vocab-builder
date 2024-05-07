@@ -180,3 +180,36 @@
   width: 65px;
   text-decoration: underline;
 }
+
+.resultWrapper {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.resultList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.resultTitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgb(252, 252, 252, 0.5);
+  margin-bottom: 8px;
+}
+
+.resultItem {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: rgb(252, 252, 252, 1);
+  margin-bottom: 4px;
+}

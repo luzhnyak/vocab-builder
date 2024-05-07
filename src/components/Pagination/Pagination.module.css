@@ -1,0 +1,40 @@
+.wrapper {
+  margin-top: 28px;
+  margin-bottom: 50px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--primary-color-black);
+  border: 1px solid var(--primary-color-fon);
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--primary-color);
+  color: var(--primary-color-white);
+}
+
+.btnActive {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: var(--primary-color-white);
+  border: 1px solid var(--primary-color-fon);
+}

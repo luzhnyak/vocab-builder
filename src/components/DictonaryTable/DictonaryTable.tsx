@@ -6,20 +6,42 @@ import { useEffect, useState } from "react";
 import Popup from "../Popup/Popup";
 import Modal from "../Modal/Modal";
 import EditWordForm from "../Forms/EditWordForm";
+import CircularProgress from "../Progress/CircularProgress";
+import Pagination from "../Pagination/Pagination";
 
 const DictonaryTable = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idWord, setIdWord] = useState<string | null>(null);
 
-  const { ownWords, getOwnWords } = useWords((state) => ({
+  const {
+    ownWords,
+    category,
+    page,
+    refresh,
+    keyword,
+    isIrregular,
+    getOwnWords,
+    setPage,
+  } = useWords((state) => ({
+    category: state.category,
+    isIrregular: state.isIrregular,
+    page: state.page,
+    refresh: state.refresh,
+    keyword: state.keyword,
     ownWords: state.ownWords,
+    setPage: state.setPage,
     getOwnWords: state.getOwnWords,
   }));
 
   useEffect(() => {
-    getOwnWords();
-  }, [getOwnWords]);
+    getOwnWords({
+      category: category || "",
+      page: page.toString(),
+      isIrregular: isIrregular.toString(),
+      keyword: keyword || "",
+    });
+  }, [getOwnWords, page, keyword, category, isIrregular, refresh]);
 
   const handlePopupClick = (id: string) => {
     setShowPopup(!showPopup);
@@ -56,7 +78,19 @@ const DictonaryTable = () => {
                   <td>{word.en}</td>
                   <td>{word.ua}</td>
                   <td>{word.category}</td>
-                  <td> {word.progress} %</td>
+                  <td>
+                    <div className={css.progressWrapper}>
+                      <span>{word.progress} %</span>
+                      <CircularProgress
+                        size={26}
+                        strokeWidth={4}
+                        progress={word.progress}
+                        color1="#2BD627"
+                        color2="#D4F8D3"
+                        color3="#D4F8D3"
+                      />
+                    </div>
+                  </td>
                   <td className={css.lastTd}>
                     <button
                       className={css.btnPopup}
@@ -91,6 +125,11 @@ const DictonaryTable = () => {
             })}
         </tbody>
       </table>
+      <Pagination
+        totalPages={ownWords?.totalPages || 1}
+        page={page}
+        onPageChange={setPage}
+      />
     </div>
   );
 };

@@ -1,15 +1,13 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { IUser, IWord } from "./types";
+import { Answer, IUser, IWord, Result, SearchParams } from "./types";
 import {
-  // addWord,
-  // createWord,
+  addAnswer,
   currentUser,
-  // deleteWord,
-  // editWord,
   getAllWords,
   getOwnWords,
+  getTasks,
   getWordsCategories,
   logout,
   signin,
@@ -56,49 +54,80 @@ export const useAuth = create<AuthState>()(
 
 interface WordsState {
   categories: string[] | null;
-  allWords: { results: IWord[] } | null;
-  ownWords: { results: IWord[] } | null;
-
+  category: string;
+  keyword: string | null;
+  page: number;
+  refresh: boolean;
+  isIrregular: boolean;
+  allWords: { results: IWord[]; totalPages: number } | null;
+  ownWords: { results: IWord[]; totalPages: number } | null;
+  tasks: Answer[];
+  result: Result[];
+  setWordsCategory: (category: string) => void;
+  setIsIrregular: (isIrregular: boolean) => void;
+  setKeyword: (keyword: string) => void;
+  setPage: (page: number) => void;
+  setRefresh: (refresh: boolean) => void;
   getWordsCategories: () => void;
-  // createWord: (word: IWordCreate) => void;
-  // addWord: (id: string) => void;
-  // deleteWord: (id: string) => void;
-  // editWord: (id: string, word: IWordCreate) => void;
-  getAllWords: () => void;
-  getOwnWords: () => void;
+  getAllWords: (searchParams: SearchParams) => void;
+  getOwnWords: (searchParams: SearchParams) => void;
+  getTasks: () => void;
+  addAnswer: (answers: Answer[]) => void;
 }
 
 export const useWords = create<WordsState>()(
   devtools(
     (set) => ({
       categories: null,
+      category: "verb",
+      keyword: null,
+      page: 1,
+      refresh: true,
+      isIrregular: false,
       allWords: null,
       ownWords: null,
-
+      tasks: [],
+      result: [],
+      setWordsCategory: async (category) => {
+        set(() => ({ category: category }));
+      },
+      setKeyword: async (keyword) => {
+        set(() => ({ keyword: keyword }));
+      },
+      setPage: async (page) => {
+        set(() => ({ page }));
+      },
+      setRefresh: async (refresh) => {
+        set(() => ({ refresh }));
+      },
+      setIsIrregular: async (isIrregular) => {
+        set(() => ({ isIrregular }));
+      },
       getWordsCategories: async () => {
         const data = await getWordsCategories();
         set(() => ({ categories: data }));
       },
-      // createWord: async (word) => {
-      //   await createWord(word);
-      //   await getOwnWords();
-      // },
-      // addWord: async (id) => {
-      //   await addWord(id);
-      // },
-      // deleteWord: async (id) => {
-      //   await deleteWord(id);
-      // },
-      // editWord: async (id, word) => {
-      //   await editWord(id, word);
-      // },
-      getAllWords: async () => {
-        const data = await getAllWords();
+      getAllWords: async (searchParams: SearchParams) => {
+        const data = await getAllWords(searchParams);
         set(() => ({ allWords: data }));
       },
-      getOwnWords: async () => {
-        const data = await getOwnWords();
-        set(() => ({ ownWords: data }));
+      getOwnWords: async (searchParams: SearchParams) => {
+        const data = await getOwnWords(searchParams);
+        set(() => {
+          return { ownWords: data };
+        });
+      },
+      getTasks: async () => {
+        const { tasks } = await getTasks();
+        set(() => {
+          return { tasks };
+        });
+      },
+      addAnswer: async (answers) => {
+        const data = await addAnswer(answers);
+        set(() => {
+          return { result: data };
+        });
       },
     }),
     { name: "words" }

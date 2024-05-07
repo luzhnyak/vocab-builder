@@ -4,7 +4,7 @@ import DictonaryTable from "../components/DictonaryTable/DictonaryTable";
 const DictonaryPage = () => {
   return (
     <main className="container">
-      <Dashboard />
+      <Dashboard isAddWord={true} />
       <DictonaryTable />
     </main>
   );

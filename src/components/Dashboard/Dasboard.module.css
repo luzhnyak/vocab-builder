@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 24px;
   margin-top: 80px;
   margin-bottom: 28px;
@@ -35,4 +36,66 @@
 .btn:hover,
 .btn:active {
   color: var(--primary-color-akcent);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  padding: 16px 18px;
+  box-sizing: border-box;
+  color: var(--primary-color-black);
+  width: 100%;
+  height: 48px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 15px;
+}
+
+.btnSearch {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.dropdounWrapper {
+  width: 164px;
+}
+
+.radioGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.radioWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.radioWrapper label {
+  cursor: pointer;
+}
+
+.inputRadio {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--primary-color-white);
+}
+
+.inputRadio[type="radio"]:checked {
+  background-color: var(--primary-color);
+  color: var(--primary-color-white);
+  border: 2px solid var(--primary-color);
+  background-clip: content-box;
+  padding: 3px;
 }

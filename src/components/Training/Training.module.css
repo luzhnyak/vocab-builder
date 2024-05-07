@@ -1,0 +1,155 @@
+.wrapper {
+  color: var(--primary-color-black);
+  margin-top: 62px;
+}
+
+.blockWrapper {
+  width: 100%;
+  border: 18px solid white;
+  border-radius: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.uaBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 22px;
+  border-right: 1px solid #dbdbdb;
+}
+
+.enBlock {
+  width: 100%;
+  padding: 22px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.inputWrapper:not(:last-child) {
+  margin-bottom: 18px;
+}
+
+.input {
+  display: block;
+  padding: 16px 18px;
+  box-sizing: border-box;
+  background-color: transparent;
+  width: 420px;
+  height: 230px;
+  border: none;
+  margin-right: 24px;
+  resize: none;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  width: 203px;
+  height: 56px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: var(--primary-color-white);
+  border: none;
+  border-radius: 30px;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--primary-color-akcent);
+}
+
+.btnCancel {
+  cursor: pointer;
+  width: 203px;
+  height: 56px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background-color: transparent;
+  color: var(--primary-color);
+  border-radius: 30px;
+  border: 1px solid var(--primary-color-akcent);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.btnCancel:hover,
+.btnCancel:active {
+  color: var(--primary-color-akcent);
+}
+
+.btnNext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  margin-right: auto;
+}
+
+.btnNext:hover,
+.btnNext:active {
+  color: var(--primary-color-akcent);
+}
+
+.labelWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.progress {
+  display: block;
+  width: 58px;
+  margin-left: auto;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.inputError {
+  border: 1px solid red;
+}
+
+.inputError:focus {
+  border: 1px solid red;
+  outline: 1px solid red;
+}
+
+.errormessage {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: red;
+  font-size: 14px;
+}

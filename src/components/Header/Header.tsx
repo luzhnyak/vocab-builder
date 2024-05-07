@@ -22,7 +22,6 @@ const Header = () => {
     <header className={`container ${css.header}`}>
       <nav className={css.nav}>
         <Link className={css.logo} to="/">
-          {/* <Logo /> */}
           <img className={css.logoImg} src={logo} />
           <span className={css.logoText}>VocabBuilder</span>
         </Link>

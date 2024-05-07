@@ -37,7 +37,7 @@ const ListDropdown = React.forwardRef(
         window.removeEventListener("keydown", handleKeyDown);
         document.removeEventListener("mousedown", handleClose);
       };
-    }, [onClose]);
+    }, [onClose, ref]);
 
     return (
       <div className={css.listWrapper} ref={listRef}>

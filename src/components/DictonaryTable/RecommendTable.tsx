@@ -3,18 +3,37 @@ import uk from "../../icons/uk.svg";
 import ua from "../../icons/ua.svg";
 import { useWords } from "../../store";
 import { useEffect } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import arrowRight from "../../icons/switch-horizontal.svg";
 import { addWord } from "../../services/vocabApi";
+import Pagination from "../Pagination/Pagination";
 
 const RecommendTable = () => {
-  const { allWords, getAllWords } = useWords((state) => ({
+  const {
+    allWords,
+    category,
+    page,
+    keyword,
+    isIrregular,
+    getAllWords,
+    setPage,
+  } = useWords((state) => ({
     allWords: state.allWords,
+    category: state.category,
+    isIrregular: state.isIrregular,
+    page: state.page,
+    keyword: state.keyword,
     getAllWords: state.getAllWords,
+    setPage: state.setPage,
   }));
 
   useEffect(() => {
-    getAllWords();
-  }, [getAllWords]);
+    getAllWords({
+      category: category || "",
+      page: page.toString(),
+      isIrregular: isIrregular.toString(),
+      keyword: keyword || "",
+    });
+  }, [getAllWords, page, keyword, category, isIrregular]);
 
   const handleAddToDictonary = (id: string) => {
     addWord(id);
@@ -55,7 +74,7 @@ const RecommendTable = () => {
                     onClick={() => handleAddToDictonary(word._id)}
                   >
                     Add to dictionary
-                    <FaArrowRight className={css.btnAddIcon} />
+                    <img src={arrowRight} alt="" />
                   </button>
                 </td>
               </tr>
@@ -63,6 +82,11 @@ const RecommendTable = () => {
           })}
         </tbody>
       </table>
+      <Pagination
+        totalPages={allWords?.totalPages || 1}
+        page={page}
+        onPageChange={setPage}
+      />
     </div>
   );
 };

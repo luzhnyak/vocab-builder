@@ -14,7 +14,7 @@
   border-radius: 14px;
   background-color: var(--primary-color-white);
   color: var(--primary-color-black);
-  border: none;
+  border: 1px solid rgba(18, 20, 23, 0.1);
   padding: 14px 18px;
   cursor: pointer;
 }
@@ -47,7 +47,7 @@
 }
 
 .item {
-  color: rgba(18, 20, 23, 0.2);
+  color: var(--primary-color-black);
   cursor: pointer;
   line-height: 20px;
   margin-bottom: 8px;
@@ -56,7 +56,7 @@
   text-overflow: ellipsis;
 
   &:hover {
-    color: var(--primary-color-black);
+    color: var(--active-color-black);
   }
   &:last-child {
     margin-bottom: 0px;

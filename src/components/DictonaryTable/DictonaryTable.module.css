@@ -86,3 +86,9 @@
 .btnAddIcon {
   color: var(--primary-color);
 }
+
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

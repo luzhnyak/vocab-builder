@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import css from "./Form.module.css";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import eye from "../../icons/eye.svg";
 import eyeOff from "../../icons/eye-off.svg";
@@ -14,14 +15,9 @@ const loginSchema = yup.object({
   password: yup.string().min(6).max(30).required(),
 });
 
-export interface SubmitValues {
+type Inputs = {
   email: string;
   password: string;
-}
-
-const initialValues: SubmitValues = {
-  email: "",
-  password: "",
 };
 
 const LoginForm: FC = () => {
@@ -31,12 +27,20 @@ const LoginForm: FC = () => {
     signin: state.signin,
   }));
 
-  const handleSubmit = async (
-    values: SubmitValues,
-    { resetForm }: FormikHelpers<SubmitValues>
-  ) => {
-    signin(values);
-    resetForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: yupResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    signin(data);
   };
 
   return (
@@ -45,56 +49,45 @@ const LoginForm: FC = () => {
       <p className={css.text}>
         Please enter your login details to continue using our service:
       </p>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={loginSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ errors, values }) => (
-          <Form>
-            <div className={css.inputWrapper}>
-              <Field
-                className={`${css.input} ${errors.email ? css.inputError : ""}`}
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={values.email}
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className={css.errormessage}
-              />
-            </div>
-            <div className={css.inputWrapper}>
-              <Field
-                className={`${css.input} ${
-                  errors.password ? css.inputError : ""
-                }`}
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Password"
-                value={values.password}
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={css.errormessage}
-              />
-              <button
-                type="button"
-                className={css.btnShowPassword}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <img src={showPassword ? eye : eyeOff} alt="ShowPassword" />
-              </button>
-            </div>
-            <button className={css.btn} type="submit">
-              Log In
-            </button>
-          </Form>
-        )}
-      </Formik>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.inputWrapper}>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <input type="text" {...field} className={css.input} />
+            )}
+          />
+          {errors && (
+            <span className={css.errormessage}>{errors.email?.message}</span>
+          )}
+        </div>
+        <div className={css.inputWrapper}>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <input type="text" {...field} className={css.input} />
+            )}
+          />
+          {errors && (
+            <span className={css.errormessage}>{errors.email?.message}</span>
+          )}
+
+          <button
+            type="button"
+            className={css.btnShowPassword}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <img src={showPassword ? eye : eyeOff} alt="ShowPassword" />
+          </button>
+        </div>
+        <button className={css.btn} type="submit">
+          Log In
+        </button>
+      </form>
+
       <Link className={css.register} to="/register">
         Register
       </Link>

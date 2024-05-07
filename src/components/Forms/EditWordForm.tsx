@@ -1,11 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import css from "./EditWordForm.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import imgUk from "../../icons/uk.svg";
 import imgUa from "../../icons/ua.svg";
-import { Controller } from "react-hook-form";
+
 import { FC } from "react";
 import { useWords } from "../../store";
 import { editWord } from "../../services/vocabApi";
@@ -37,14 +37,14 @@ const EditWordForm: FC<IProps> = ({
   isIrregular,
   onClose,
 }) => {
-  const { getOwnWords } = useWords((state) => ({
-    getOwnWords: state.getOwnWords,
+  const { setRefresh, refresh } = useWords((state) => ({
+    refresh: state.refresh,
+    setRefresh: state.setRefresh,
   }));
 
   const {
     control,
     handleSubmit,
-    // setValue,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(editWordSchema),
@@ -56,7 +56,7 @@ const EditWordForm: FC<IProps> = ({
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await editWord(id, { en: data.en, ua: data.ua, category, isIrregular });
-    getOwnWords();
+    setRefresh(!refresh);
     onClose();
   };
 

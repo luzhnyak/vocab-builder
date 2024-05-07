@@ -21,3 +21,22 @@ export interface IWordCreate {
   category: string;
   isIrregular?: boolean;
 }
+
+export interface SearchParams {
+  [key: string]: string;
+}
+
+export interface Answer {
+  _id: string;
+  ua?: string;
+  en?: string;
+  task: string;
+}
+
+export interface Result {
+  _id: string;
+  ua: string;
+  en: string;
+  task: string;
+  isDone: boolean;
+}
