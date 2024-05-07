@@ -13,70 +13,45 @@ export const clearToken = () => {
 };
 
 export const signin = async ({ email, password }: IUser) => {
-  try {
-    const { data } = await axios.post("/users/signin", { email, password });
-    setToken(data.token);
+  const { data } = await axios.post("/users/signin", { email, password });
+  setToken(data.token);
 
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  return data;
 };
 
 export const signup = async ({ name, email, password }: IUser) => {
-  try {
-    const { data } = await axios.post("/users/signup", {
-      name,
-      email,
-      password,
-    });
+  const { data } = await axios.post("/users/signup", {
+    name,
+    email,
+    password,
+  });
 
-    setToken(data.token);
+  setToken(data.token);
 
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  return data;
 };
 
 export const logout = async () => {
-  try {
-    const { data } = await axios.post("/users/logout");
+  const { data } = await axios.post("/users/signout");
 
-    clearToken();
+  clearToken();
 
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  return data;
 };
 
 export const currentUser = async () => {
-  try {
-    const { data } = await axios.get("/users/current");
-
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.get("/users/current");
+  return data;
 };
 
 export const getWordsCategories = async () => {
-  try {
-    const { data } = await axios.get("/words/categories");
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.get("/words/categories");
+  return data;
 };
 
 export const createWord = async (word: IWordCreate) => {
-  try {
-    const { data } = await axios.post("/words/create", word);
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.post("/words/create", word);
+  return data;
 };
 
 export const addWord = async (id: string) => {
@@ -98,37 +73,29 @@ export const editWord = async (id: string, word: IWordCreate) => {
 };
 
 export const getAllWords = async (params: SearchParams) => {
-  try {
-    for (const key in params) {
-      if (!params[key]) {
-        delete params[key];
-      }
+  for (const key in params) {
+    if (!params[key]) {
+      delete params[key];
     }
-    const searchParams = new URLSearchParams({ ...params });
-    const queryString = searchParams.toString();
-
-    const { data } = await axios.get("/words/all?" + queryString);
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
   }
+  const searchParams = new URLSearchParams({ ...params });
+  const queryString = searchParams.toString();
+
+  const { data } = await axios.get("/words/all?" + queryString);
+  return data;
 };
 
 export const getOwnWords = async (params: SearchParams) => {
-  try {
-    for (const key in params) {
-      if (!params[key]) {
-        delete params[key];
-      }
+  for (const key in params) {
+    if (!params[key]) {
+      delete params[key];
     }
-    const searchParams = new URLSearchParams({ ...params });
-    const queryString = searchParams.toString();
-
-    const { data } = await axios.get(`/words/own?` + queryString);
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
   }
+  const searchParams = new URLSearchParams({ ...params });
+  const queryString = searchParams.toString();
+
+  const { data } = await axios.get(`/words/own?` + queryString);
+  return data;
 };
 
 export const deleteWord = async (id: string) => {
@@ -141,28 +108,16 @@ export const deleteWord = async (id: string) => {
 };
 
 export const getStatistics = async () => {
-  try {
-    const { data } = await axios.get("/words/statistics");
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.get("/words/statistics");
+  return data;
 };
 
 export const getTasks = async () => {
-  try {
-    const { data } = await axios.get("/words/tasks");
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.get("/words/tasks");
+  return data;
 };
 
 export const addAnswer = async (answers: Answer[]) => {
-  try {
-    const { data } = await axios.post(`/words/answers`, answers);
-    return data;
-  } catch (error) {
-    showError(error as AxiosError);
-  }
+  const { data } = await axios.post(`/words/answers`, answers);
+  return data;
 };

@@ -4,7 +4,7 @@ import { lazy, useEffect } from "react";
 import { SharedLayout } from "./components/SharedLayout";
 import { PrivateRoute } from "./pages/PrivateRoute";
 import { RestrictedRoute } from "./pages/RestrictedRoute";
-import { useAuth } from "./store";
+import { useAuth, useToken } from "./store";
 import { setToken } from "./services/vocabApi";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -14,17 +14,24 @@ const RecommendPage = lazy(() => import("./pages/RecommendPage"));
 const TrainingPage = lazy(() => import("./pages/TrainingPage"));
 
 const App = () => {
-  const { isLogin, currentUser } = useAuth((state) => ({
+  const { isLogin, currentUser, getCurrentUser } = useAuth((state) => ({
     isLogin: state.isLogin,
     currentUser: state.currentUser,
     getCurrentUser: state.getCurrentUser,
   }));
 
+  const { token } = useToken((state) => ({
+    token: state.token,
+  }));
+
   useEffect(() => {
-    if (isLogin && currentUser?.token) {
-      setToken(currentUser.token);
+    if (token) {
+      setToken(token);
     }
-  }, [currentUser, isLogin]);
+    if (!isLogin && token) {
+      getCurrentUser();
+    }
+  }, [currentUser, getCurrentUser, isLogin, token]);
 
   return (
     <Routes>

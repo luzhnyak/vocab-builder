@@ -1,6 +1,6 @@
 import { useEffect, useState, FC } from "react";
 import Dropdown from "../Dropdown/Dropdown";
-import { useWords } from "../../store";
+import { useAuth, useWords } from "../../store";
 import css from "./Dasboard.module.css";
 import plus from "../../icons/plus.svg";
 import arrowRight from "../../icons/switch-horizontal.svg";
@@ -40,6 +40,10 @@ const Dashboard: FC<IProps> = ({ isAddWord = false }) => {
     getOwnWords: state.getOwnWords,
   }));
 
+  const { isLogin } = useAuth((state) => ({
+    isLogin: state.isLogin,
+  }));
+
   const { control, handleSubmit } = useForm<{ keyword: string }>({
     defaultValues: {
       keyword: "",
@@ -57,8 +61,10 @@ const Dashboard: FC<IProps> = ({ isAddWord = false }) => {
   };
 
   useEffect(() => {
+    if (!isLogin) return;
+
     getWordsCategories();
-  }, [getWordsCategories]);
+  }, [getWordsCategories, isLogin]);
 
   return (
     <div className={css.wrapper}>

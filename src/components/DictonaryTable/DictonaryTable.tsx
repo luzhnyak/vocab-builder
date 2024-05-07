@@ -1,7 +1,7 @@
 import css from "./DictonaryTable.module.css";
 import uk from "../../icons/uk.svg";
 import ua from "../../icons/ua.svg";
-import { useWords } from "../../store";
+import { useAuth, useWords } from "../../store";
 import { useEffect, useState } from "react";
 import Popup from "../Popup/Popup";
 import Modal from "../Modal/Modal";
@@ -34,14 +34,20 @@ const DictonaryTable = () => {
     getOwnWords: state.getOwnWords,
   }));
 
+  const { isLogin } = useAuth((state) => ({
+    isLogin: state.isLogin,
+  }));
+
   useEffect(() => {
+    if (!isLogin) return;
+
     getOwnWords({
       category: category || "",
       page: page.toString(),
       isIrregular: isIrregular.toString(),
       keyword: keyword || "",
     });
-  }, [getOwnWords, page, keyword, category, isIrregular, refresh]);
+  }, [getOwnWords, page, keyword, category, isIrregular, refresh, isLogin]);
 
   const handlePopupClick = (id: string) => {
     setShowPopup(!showPopup);

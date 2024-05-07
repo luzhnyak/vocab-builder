@@ -26,7 +26,11 @@
   } */
 }
 
-.itemRight {
-  width: 100%;
-  flex: 1;
+@media only screen and (max-width: 1181px) {
+  .itemRight {
+    width: 100%;
+  }
+  .itemRightImg {
+    display: none;
+  }
 }

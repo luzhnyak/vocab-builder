@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./Training.module.css";
 import arrowRight from "../../icons/switch-horizontal.svg";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -27,9 +27,8 @@ const Training = () => {
   const [progress, setProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const { tasks, getTasks, addAnswer, result } = useWords((state) => ({
+  const { tasks, addAnswer, result } = useWords((state) => ({
     tasks: state.tasks,
-    getTasks: state.getTasks,
     addAnswer: state.addAnswer,
     result: state.result,
   }));
@@ -89,10 +88,6 @@ const Training = () => {
     reset();
   };
 
-  useEffect(() => {
-    getTasks();
-  }, [getTasks]);
-
   return (
     <div className={css.wrapper}>
       <div className={css.progress}>
@@ -129,12 +124,12 @@ const Training = () => {
           </div>
           <div className={css.enBlock}>
             <div className={css.inputWrapper}>
-              <div>
+              <div className={css.textareaWrapper}>
                 <Controller
                   name="answerWord"
                   control={control}
                   render={({ field }) => (
-                    <textarea {...field} className={css.input} />
+                    <input type="text" {...field} className={css.input} />
                   )}
                 />
                 {errors && (
@@ -159,7 +154,7 @@ const Training = () => {
           Cancel
         </button>
       </div>
-      {showModal && result?.length && (
+      {showModal && result?.length !== 0 && (
         <Modal onClose={() => setShowModal(false)}>
           <WellDone />
         </Modal>

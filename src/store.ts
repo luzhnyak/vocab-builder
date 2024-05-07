@@ -13,6 +13,27 @@ import {
   signin,
   signup,
 } from "./services/vocabApi";
+import { showError } from "./services/showError";
+import { AxiosError } from "axios";
+
+interface TokenState {
+  token: string | null;
+  setTokenState: (token: string) => void;
+}
+
+export const useToken = create<TokenState>()(
+  devtools(
+    persist(
+      (set) => ({
+        token: null,
+        setTokenState: async (token) => {
+          set(() => ({ token }));
+        },
+      }),
+      { name: "token" }
+    )
+  )
+);
 
 interface AuthState {
   currentUser: IUser | null;
@@ -22,33 +43,77 @@ interface AuthState {
   signin: (user: IUser) => void;
   logout: () => void;
   getCurrentUser: () => void;
+  setIsLogin: (value: boolean) => void;
 }
 
 export const useAuth = create<AuthState>()(
   devtools(
-    persist(
-      (set) => ({
-        currentUser: null,
-        isLogin: true,
-        signup: async (user) => {
+    (set) => ({
+      currentUser: null,
+      isLogin: false,
+      setIsLogin: async (value) => {
+        set(() => ({ isLogin: value }));
+      },
+      signup: async (user) => {
+        try {
           const data = await signup(user);
+          const tokenState = useToken.getState();
+          tokenState.setTokenState(data.token);
           set(() => ({ currentUser: data, isLogin: true }));
-        },
-        signin: async (user) => {
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            set(() => ({ currentUser: null, isLogin: false }));
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+          }
+        }
+      },
+      signin: async (user) => {
+        try {
           const data = await signin(user);
+          const tokenState = useToken.getState();
+          tokenState.setTokenState(data.token);
           set(() => ({ currentUser: data, isLogin: true }));
-        },
-        logout: async () => {
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            set(() => ({ currentUser: null, isLogin: false }));
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+          }
+        }
+      },
+      logout: async () => {
+        try {
           await logout();
+          const tokenState = useToken.getState();
+          tokenState.setTokenState("");
           set(() => ({ currentUser: null, isLogin: false }));
-        },
-        getCurrentUser: async () => {
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            set(() => ({ currentUser: null, isLogin: false }));
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+          }
+        }
+      },
+      getCurrentUser: async () => {
+        try {
           const data = await currentUser();
           set(() => ({ currentUser: data, isLogin: true }));
-        },
-      }),
-      { name: "auth" }
-    )
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            set(() => ({ currentUser: null, isLogin: false }));
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+          }
+        }
+      },
+    }),
+    { name: "auth" }
   )
 );
 
@@ -104,30 +169,79 @@ export const useWords = create<WordsState>()(
         set(() => ({ isIrregular }));
       },
       getWordsCategories: async () => {
-        const data = await getWordsCategories();
-        set(() => ({ categories: data }));
+        try {
+          const data = await getWordsCategories();
+          set(() => ({ categories: data }));
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+            const authState = useAuth.getState();
+            authState.setIsLogin(false);
+          }
+        }
       },
       getAllWords: async (searchParams: SearchParams) => {
-        const data = await getAllWords(searchParams);
-        set(() => ({ allWords: data }));
+        try {
+          const data = await getAllWords(searchParams);
+          set(() => ({ allWords: data }));
+        } catch (error) {
+          if ((error as AxiosError).response?.status === 401) {
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+            const authState = useAuth.getState();
+            authState.setIsLogin(false);
+          }
+        }
       },
       getOwnWords: async (searchParams: SearchParams) => {
-        const data = await getOwnWords(searchParams);
-        set(() => {
-          return { ownWords: data };
-        });
+        try {
+          const data = await getOwnWords(searchParams);
+          set(() => {
+            return { ownWords: data };
+          });
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+            const authState = useAuth.getState();
+            authState.setIsLogin(false);
+          }
+        }
       },
       getTasks: async () => {
-        const { tasks } = await getTasks();
-        set(() => {
-          return { tasks };
-        });
+        try {
+          const { tasks } = await getTasks();
+          set(() => {
+            return { tasks };
+          });
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+            const authState = useAuth.getState();
+            authState.setIsLogin(false);
+          }
+        }
       },
       addAnswer: async (answers) => {
-        const data = await addAnswer(answers);
-        set(() => {
-          return { result: data };
-        });
+        try {
+          const data = await addAnswer(answers);
+          set(() => {
+            return { result: data };
+          });
+        } catch (error) {
+          showError(error as AxiosError);
+          if ((error as AxiosError).response?.status === 401) {
+            const tokenState = useToken.getState();
+            tokenState.setTokenState("");
+            const authState = useAuth.getState();
+            authState.setIsLogin(false);
+          }
+        }
       },
     }),
     { name: "words" }

@@ -169,3 +169,9 @@
     z-index: 2001;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .menuItemLogout {
+    display: none;
+  }
+}
