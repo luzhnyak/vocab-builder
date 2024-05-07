@@ -1,6 +1,9 @@
 .wrapper {
   color: var(--primary-color-black);
   margin-top: 62px;
+  @media only screen and (max-width: 767px) {
+    margin-top: 24px;
+  }
 }
 
 .blockWrapper {

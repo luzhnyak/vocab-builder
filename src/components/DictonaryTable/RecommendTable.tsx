@@ -47,13 +47,13 @@ const RecommendTable = () => {
             <th>
               <div className={css.thWrapper}>
                 <span>Word</span>
-                <img src={uk} alt="Word" />
+                <img src={uk} alt="Word" className={css.flag} />
               </div>
             </th>
             <th>
               <div className={css.thWrapper}>
                 <span>Translation</span>
-                <img src={ua} alt="Translation" />
+                <img src={ua} alt="Translation" className={css.flag} />
               </div>
             </th>
             <th>Category</th>
@@ -73,7 +73,7 @@ const RecommendTable = () => {
                     className={css.btnAdd}
                     onClick={() => handleAddToDictonary(word._id)}
                   >
-                    Add to dictionary
+                    <span className={css.btnHide}>Add to dictionary</span>
                     <img src={arrowRight} alt="" />
                   </button>
                 </td>

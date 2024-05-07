@@ -9,6 +9,7 @@
   line-height: 48px;
   letter-spacing: -0.02em;
   color: var(--primary-color-white);
+  text-align: center;
 }
 
 .text {
@@ -183,10 +184,10 @@
 
 .resultWrapper {
   width: 100%;
-  max-height: 400px;
+  height: 424px;
   overflow-y: auto;
   display: flex;
-  justify-content: space-around;
+
   gap: 16px;
 }
 
@@ -212,4 +213,14 @@
   line-height: 28px;
   color: rgb(252, 252, 252, 1);
   margin-bottom: 4px;
+}
+
+.resultImg {
+  position: absolute;
+  bottom: 21px;
+  right: 6px;
+}
+
+.block {
+  flex-grow: 1;
 }

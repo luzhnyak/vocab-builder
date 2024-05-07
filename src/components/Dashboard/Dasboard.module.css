@@ -5,6 +5,13 @@
   gap: 24px;
   margin-top: 80px;
   margin-bottom: 28px;
+  @media only screen and (max-width: 1029px) {
+    flex-direction: column;
+  }
+
+  @media only screen and (max-width: 767px) {
+    margin-top: 32px;
+  }
 }
 
 .wrapperBtn {
@@ -12,6 +19,9 @@
   align-items: center;
   gap: 8px;
   color: var(--backdrop-color-black);
+  @media only screen and (max-width: 767px) {
+    flex-direction: column;
+  }
 }
 
 .stadyCount {
@@ -66,6 +76,9 @@
 
 .dropdounWrapper {
   width: 164px;
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
 }
 
 .radioGroup {

@@ -2,7 +2,6 @@
   width: 100%;
   border: 18px solid white;
   border-radius: 15px;
-  /* background-color: #dbdbdb; */
 }
 
 .headRow {
@@ -91,4 +90,62 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .flag {
+    display: none;
+  }
+  .category {
+    display: none;
+  }
+
+  .table {
+    border: none;
+  }
+
+  .btnPopup {
+    font-size: 16px;
+  }
+
+  .bodyRow {
+    td {
+      padding: 12px;
+    }
+  }
+  .headRow {
+    th {
+      padding: 12px;
+    }
+  }
+  .btnHide {
+    display: none;
+  }
+
+  .progressWrapper {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .table {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .btnPopup {
+    font-size: 14px;
+  }
+
+  .bodyRow {
+    td {
+      padding: 8px;
+    }
+  }
+  .headRow {
+    th {
+      padding: 8px;
+    }
+  }
 }

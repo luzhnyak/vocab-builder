@@ -62,16 +62,16 @@ const DictonaryTable = () => {
             <th>
               <div className={css.thWrapper}>
                 <span>Word</span>
-                <img src={uk} alt="Word" />
+                <img src={uk} alt="Word" className={css.flag} />
               </div>
             </th>
             <th>
               <div className={css.thWrapper}>
                 <span>Translation</span>
-                <img src={ua} alt="Translation" />
+                <img src={ua} alt="Translation" className={css.flag} />
               </div>
             </th>
-            <th>Category</th>
+            <th className={css.category}>Category</th>
             <th>Progress</th>
             <th></th>
           </tr>
@@ -83,10 +83,10 @@ const DictonaryTable = () => {
                 <tr className={css.bodyRow} key={word._id}>
                   <td>{word.en}</td>
                   <td>{word.ua}</td>
-                  <td>{word.category}</td>
+                  <td className={css.category}>{word.category}</td>
                   <td>
                     <div className={css.progressWrapper}>
-                      <span>{word.progress} %</span>
+                      <span className={css.category}>{word.progress} %</span>
                       <CircularProgress
                         size={26}
                         strokeWidth={4}

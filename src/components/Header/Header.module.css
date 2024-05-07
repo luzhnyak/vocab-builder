@@ -141,17 +141,40 @@
     top: 0;
     bottom: 0;
     width: 100%;
-    background-color: var(--primary-color-white);
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 32px;
+    padding-top: 180px;
     gap: 16px;
     height: 100vh;
     list-style: none;
     z-index: 2000;
     font-size: 24px;
     transition: left 500ms;
+    background-image: url("./images/illustration-menu.png");
+    background-image: url("./images/illustration-menu@2x.png");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 360px;
+  }
+
+  .menuLink {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 12px 20px;
+    border-radius: 15px;
+
+    &.active {
+      background-color: var(--primary-color-white);
+    }
+  }
+
+  .menuLink.active {
+    background-color: var(--primary-color-white);
   }
 
   .isShowMenu {
@@ -167,6 +190,11 @@
     right: 50px;
     top: 32px;
     z-index: 2001;
+  }
+
+  .btnLogout {
+    font-size: 14px;
+    padding: 14px 20px;
   }
 }
 
