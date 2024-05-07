@@ -12,8 +12,10 @@ interface IProps {
 }
 
 const Popup: FC<IProps> = ({ setShowEditModal, onClose, id }) => {
-  const { getOwnWords } = useWords((state) => ({
+  const { refresh, setRefresh } = useWords((state) => ({
     getOwnWords: state.getOwnWords,
+    refresh: state.refresh,
+    setRefresh: state.setRefresh,
   }));
 
   const handleEdit = () => {
@@ -23,7 +25,7 @@ const Popup: FC<IProps> = ({ setShowEditModal, onClose, id }) => {
 
   const handleDelete = async () => {
     await deleteWord(id);
-    getOwnWords();
+    setRefresh(!refresh);
     onClose();
   };
   return (
