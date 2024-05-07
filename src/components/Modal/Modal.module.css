@@ -21,10 +21,10 @@
   max-height: calc(100vh);
   overflow: auto;
   @media only screen and (max-width: 767px) {
-    padding: 32px;
+    padding: 48px 32px 32px 32px;
   }
   @media only screen and (max-width: 475px) {
-    padding: 24px;
+    padding: 48px 24px 24px 24px;
   }
 }
 
