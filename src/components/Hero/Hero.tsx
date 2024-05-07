@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import css from "./Hero.module.css";
 import heroImg from "../../images/illustration.png";
 import { FC, PropsWithChildren } from "react";

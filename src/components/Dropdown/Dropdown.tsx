@@ -10,6 +10,7 @@ interface IListDropdownProps {
 }
 
 const ListDropdown = React.forwardRef(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ({ items, onSelect, onClose }: IListDropdownProps, ref: any) => {
     const listRef = useRef<HTMLDivElement>(null);
 

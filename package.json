@@ -13,7 +13,6 @@
     "@hookform/resolvers": "^3.3.4",
     "@types/node": "^20.11.24",
     "axios": "^1.6.7",
-    "formik": "^2.4.5",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
