@@ -1,11 +1,17 @@
 .wrapper {
   width: 628px;
-  /* height: 592px; */
+
   background-color: var(--primary-color-fon);
   padding: 48px 64px;
   border-radius: 30px;
+  margin-top: 64px;
   @media only screen and (max-width: 1181px) {
     margin: 0 auto;
+    margin-top: 64px;
+  }
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    padding: 24px 24px;
   }
 }
 

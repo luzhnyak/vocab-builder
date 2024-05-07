@@ -4,6 +4,9 @@ import css from "./Training.module.css";
 import Modal from "../Modal/Modal";
 import AddWordForm from "../Forms/AddWordForm";
 
+import img1 from "../../images/blood-report.png";
+import img2 from "../../images/blood-report@2x.png";
+
 const TrainingEmpty = () => {
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -30,8 +33,8 @@ const TrainingEmpty = () => {
         </div>
       </div>
       <img
-        srcSet="./images/blood-report.png, ./images/blood-report@2x.png 2x"
-        src="./images/blood-report.png"
+        srcSet={`${img1} 1x, ${img2} 2x`}
+        src={img1}
         alt="blood report"
         width="265"
         height="283"

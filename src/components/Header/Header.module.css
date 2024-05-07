@@ -154,8 +154,7 @@
     z-index: 2000;
     font-size: 24px;
     transition: left 500ms;
-    background-image: url("./images/illustration-menu.png");
-    background-image: url("./images/illustration-menu@2x.png");
+    background-image: url("https://luzhnyak.github.io/vocab-builder/images/illustration-menu@2x.png");
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: 360px;

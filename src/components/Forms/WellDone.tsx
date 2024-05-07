@@ -2,6 +2,8 @@ import { FC } from "react";
 
 import css from "./EditWordForm.module.css";
 import { useWords } from "../../store";
+import img1 from "../../images/open-orange-book-floating.png";
+import img2 from "../../images/open-orange-book-floating@2x.png";
 
 interface IProps {}
 
@@ -35,8 +37,8 @@ const WellDone: FC<IProps> = () => {
         </div>
       </div>
       <img
-        srcSet="./images/open-orange-book-floating.png, ./images/open-orange-book-floating@2x.png 2x"
-        src="./images/open-orange-book-floating.png"
+        srcSet={`${img1} 1x, ${img2} 2x`}
+        src={img1}
         alt="Vocab Builder"
         className={css.resultImg}
         width="212"
