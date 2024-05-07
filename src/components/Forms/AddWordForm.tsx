@@ -116,7 +116,7 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
           </div>
         </div>
         <div className={css.inputWrapper}>
-          <div>
+          <div className={css.inputWrap}>
             <Controller
               name="ua"
               control={control}
@@ -133,7 +133,7 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
         </div>
 
         <div className={css.inputWrapper}>
-          <div>
+          <div className={css.inputWrap}>
             <Controller
               name="en"
               control={control}

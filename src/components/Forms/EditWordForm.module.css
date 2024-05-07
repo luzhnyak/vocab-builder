@@ -1,5 +1,14 @@
 .modalWrapper {
   width: 500px;
+  @media only screen and (max-width: 767px) {
+    width: 400px;
+  }
+  @media only screen and (max-width: 490px) {
+    width: 300px;
+  }
+  @media only screen and (max-width: 425px) {
+    width: 260px;
+  }
 }
 
 .title {
@@ -32,6 +41,11 @@
   color: var(--primary-color-white);
 }
 
+.inputWrap {
+  max-width: 382px;
+  width: 100%;
+}
+
 .inputWrapper:not(:last-child) {
   margin-bottom: 18px;
 }
@@ -42,7 +56,8 @@
   box-sizing: border-box;
   color: var(--primary-color-white);
   background-color: transparent;
-  width: 354px;
+  width: 100%;
+  max-width: 354px;
   height: 56px;
   border: 1px solid var(--primary-color-akcent);
   border-radius: 15px;

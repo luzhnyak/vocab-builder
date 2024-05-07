@@ -24,7 +24,6 @@
     padding: 32px;
   }
   @media only screen and (max-width: 475px) {
-    width: 90%;
     padding: 24px;
   }
 }

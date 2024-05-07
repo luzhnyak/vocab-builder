@@ -64,7 +64,7 @@ const EditWordForm: FC<IProps> = ({
     <div className={css.modalWrapper}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputWrapper}>
-          <div>
+          <div className={css.inputWrap}>
             <Controller
               name="ua"
               control={control}
@@ -81,7 +81,7 @@ const EditWordForm: FC<IProps> = ({
         </div>
 
         <div className={css.inputWrapper}>
-          <div>
+          <div className={css.inputWrap}>
             <Controller
               name="en"
               control={control}
