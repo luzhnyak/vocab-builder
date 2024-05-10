@@ -56,10 +56,15 @@ const RegisterForm: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputWrapper}>
           <Controller
-            name="email"
+            name="name"
             control={control}
             render={({ field }) => (
-              <input type="text" {...field} className={css.input} />
+              <input
+                type="text"
+                {...field}
+                className={css.input}
+                placeholder="Name"
+              />
             )}
           />
           {errors && (
@@ -71,7 +76,12 @@ const RegisterForm: FC = () => {
             name="email"
             control={control}
             render={({ field }) => (
-              <input type="text" {...field} className={css.input} />
+              <input
+                type="text"
+                {...field}
+                className={css.input}
+                placeholder="Email"
+              />
             )}
           />
           {errors && (
@@ -83,7 +93,12 @@ const RegisterForm: FC = () => {
             name="password"
             control={control}
             render={({ field }) => (
-              <input type="text" {...field} className={css.input} />
+              <input
+                type="text"
+                {...field}
+                className={css.input}
+                placeholder="Password"
+              />
             )}
           />
           {errors && (

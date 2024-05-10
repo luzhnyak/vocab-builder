@@ -45,13 +45,21 @@ export const currentUser = async () => {
 };
 
 export const getWordsCategories = async () => {
-  const { data } = await axios.get("/words/categories");
-  return data;
+  try {
+    const { data } = await axios.get("/words/categories");
+    return data;
+  } catch (error) {
+    showError(error as AxiosError);
+  }
 };
 
 export const createWord = async (word: IWordCreate) => {
-  const { data } = await axios.post("/words/create", word);
-  return data;
+  try {
+    const { data } = await axios.post("/words/create", word);
+    return data;
+  } catch (error) {
+    showError(error as AxiosError);
+  }
 };
 
 export const addWord = async (id: string) => {
@@ -78,6 +86,12 @@ export const getAllWords = async (params: SearchParams) => {
       delete params[key];
     }
   }
+
+  if (params["category"] === "all") {
+    delete params["category"];
+    delete params["isIrregular"];
+  }
+
   const searchParams = new URLSearchParams({ ...params });
   const queryString = searchParams.toString();
 
@@ -91,6 +105,12 @@ export const getOwnWords = async (params: SearchParams) => {
       delete params[key];
     }
   }
+
+  if (params["category"] === "all") {
+    delete params["category"];
+    delete params["isIrregular"];
+  }
+
   const searchParams = new URLSearchParams({ ...params });
   const queryString = searchParams.toString();
 
@@ -108,8 +128,12 @@ export const deleteWord = async (id: string) => {
 };
 
 export const getStatistics = async () => {
-  const { data } = await axios.get("/words/statistics");
-  return data;
+  try {
+    const { data } = await axios.get("/words/statistics");
+    return data;
+  } catch (error) {
+    showError(error as AxiosError);
+  }
 };
 
 export const getTasks = async () => {

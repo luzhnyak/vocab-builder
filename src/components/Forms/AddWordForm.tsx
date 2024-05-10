@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import css from "./EditWordForm.module.css";
@@ -18,8 +18,14 @@ type Inputs = {
 };
 
 const editWordSchema = yup.object({
-  en: yup.string().required(),
-  ua: yup.string().required(),
+  en: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/, "Field must be English"),
+  ua: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/u, "Field must be Ukrainian"),
   category: yup.string().required(),
   isIrregular: yup.boolean().required(),
 });
@@ -29,9 +35,12 @@ interface IProps {
 }
 
 const AddWordForm: FC<IProps> = ({ onClose }) => {
-  const { categories } = useWords((state) => ({
-    getWordsCategories: state.getWordsCategories,
+  const [showRadio, setShowRadio] = useState(true);
+
+  const { categories, refresh, setRefresh } = useWords((state) => ({
     categories: state.categories,
+    refresh: state.refresh,
+    setRefresh: state.setRefresh,
   }));
 
   const {
@@ -43,16 +52,27 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
     defaultValues: {
       en: "",
       ua: "",
-      category: "",
+      category: "verb",
       isIrregular: false,
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (data.category !== "verb") {
-      createWord({ en: data.en, ua: data.ua, category: data.category });
+      await createWord({ en: data.en, ua: data.ua, category: data.category });
     } else {
-      createWord(data);
+      await createWord(data);
+    }
+
+    setRefresh(!refresh);
+    onClose();
+  };
+
+  const handleSelectChange = (value: string) => {
+    if (value === "verb") {
+      setShowRadio(true);
+    } else {
+      setShowRadio(false);
     }
   };
 
@@ -61,7 +81,7 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
       <h3 className={css.title}>Add word</h3>
       <p className={css.text}>
         Adding a new word to the dictionary is an important step in enriching
-        the language base and expanding the vocabulary.{" "}
+        the language base and expanding the vocabulary.
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputWrapper}>
@@ -70,9 +90,20 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
               name="category"
               control={control}
               render={({ field }) => (
-                <select {...field} className={css.select}>
+                <select
+                  {...field}
+                  className={css.select}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleSelectChange(e.target.value);
+                  }}
+                >
                   {categories?.map((item) => {
-                    return <option value={item}>{item}</option>;
+                    return (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    );
                   })}
                 </select>
               )}
@@ -81,39 +112,48 @@ const AddWordForm: FC<IProps> = ({ onClose }) => {
         </div>
 
         <div className={css.inputWrapper}>
-          <div>
-            <Controller
-              name="isIrregular"
-              control={control}
-              render={({ field }) => (
-                <div className={css.radioGroup}>
-                  <div className={css.radioWrapper}>
-                    <input
-                      {...field}
-                      className={css.inputRadio}
-                      type="radio"
-                      id="option-1"
-                      value={"false"}
-                    />
-                    <label htmlFor="option-1">Regular</label>
+          {showRadio && (
+            <div>
+              <Controller
+                name="isIrregular"
+                control={control}
+                render={({ field }) => (
+                  <div className={css.radioGroup}>
+                    <div className={css.radioWrapper}>
+                      <input
+                        {...field}
+                        className={css.inputRadio}
+                        type="radio"
+                        id="option-1"
+                        value={"false"}
+                        checked
+                      />
+                      <label htmlFor="option-1" className={css.label}>
+                        Regular
+                      </label>
+                    </div>
+                    <div className={css.radioWrapper}>
+                      <input
+                        {...field}
+                        className={css.inputRadio}
+                        type="radio"
+                        id="option-2"
+                        value={"true"}
+                      />
+                      <label htmlFor="option-2" className={css.label}>
+                        Irregular
+                      </label>
+                    </div>
                   </div>
-                  <div className={css.radioWrapper}>
-                    <input
-                      {...field}
-                      className={css.inputRadio}
-                      type="radio"
-                      id="option-2"
-                      value={"true"}
-                    />
-                    <label htmlFor="option-2">Irregular</label>
-                  </div>
-                </div>
+                )}
+              />
+              {errors && (
+                <span className={css.errormessage}>
+                  {errors.isIrregular?.message}
+                </span>
               )}
-            />
-            {errors && (
-              <span className={css.errormessage}>{errors.ua?.message}</span>
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <div className={css.inputWrapper}>
           <div className={css.inputWrap}>

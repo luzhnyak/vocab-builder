@@ -135,6 +135,11 @@
   color: var(--primary-color-white);
 }
 
+.radioWrapper:hover,
+.radioWrapper:active {
+  opacity: 0.7;
+}
+
 .btnWrapper {
   display: flex;
   gap: 10px;

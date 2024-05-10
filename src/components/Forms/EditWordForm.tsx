@@ -16,8 +16,14 @@ type Inputs = {
 };
 
 const editWordSchema = yup.object({
-  en: yup.string().required(),
-  ua: yup.string().required(),
+  en: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/, "Field must be English"),
+  ua: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/u, "Field must be Ukrainian"),
 });
 
 interface IProps {

@@ -1,0 +1,19 @@
+.wrapper {
+  margin-top: 100px;
+  text-align: center;
+  color: var(--primary-color-black);
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  color: var(--primary-color);
+}
+
+.title {
+  color: var(--primary-color);
+}
+
+.text {
+  color: var(--primary-color-black);
+}

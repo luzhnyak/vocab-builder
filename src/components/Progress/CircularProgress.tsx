@@ -8,6 +8,7 @@ interface IProps {
   color2?: string;
   color3?: string;
   withText?: boolean;
+  text?: string;
 }
 const CircularProgress: FC<IProps> = ({
   size,
@@ -17,6 +18,7 @@ const CircularProgress: FC<IProps> = ({
   color2 = "#b7dfd3",
   color3 = "#ffffff",
   withText = false,
+  text,
 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -65,7 +67,7 @@ const CircularProgress: FC<IProps> = ({
           fontSize="18"
           fill="#000000"
         >
-          {progress}
+          {text || progress}
         </text>
       )}
     </svg>

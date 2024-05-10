@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./Training.module.css";
 import arrowRight from "../../icons/switch-horizontal.svg";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -14,12 +14,24 @@ import Modal from "../Modal/Modal";
 import WellDone from "../Forms/WellDone";
 
 type Inputs = {
-  answerWord: string;
+  en: string;
+  ua: string;
 };
 
 const editWordSchema = yup.object({
-  answerWord: yup.string().required("This is a required field"),
+  en: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/, "Field must be English"),
+  ua: yup
+    .string()
+    .required("Field must not be empty")
+    .matches(/^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/u, "Field must be Ukrainian"),
 });
+
+// const editWordSchema = yup.object({
+//   answerWord: yup.string().required("This is a required field"),
+// });
 
 const Training = () => {
   const [answers, setAnswers] = useState<Answer[]>([]);
@@ -37,24 +49,26 @@ const Training = () => {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(editWordSchema),
     defaultValues: {
-      answerWord: "",
+      en: "",
+      ua: "",
     },
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(tasks.length, inx);
     if (answers.length === tasks.length) return;
 
-    console.log(tasks.length, inx);
     setAnswers([
       ...answers,
       {
         _id: tasks[inx]._id,
-        ua: tasks[inx].task === "en" ? tasks[inx].ua : data.answerWord,
-        en: tasks[inx].task === "ua" ? tasks[inx].en : data.answerWord,
+        ua: data.ua,
+        en: data.en,
         task: tasks[inx].task,
       },
     ]);
@@ -88,6 +102,16 @@ const Training = () => {
     reset();
   };
 
+  useEffect(() => {
+    if (tasks[inx].task === "ua") {
+      setValue("en", tasks[inx].en || "");
+      setValue("ua", "");
+    } else {
+      setValue("en", "");
+      setValue("ua", tasks[inx].ua || "");
+    }
+  }, [setValue, inx, tasks]);
+
   return (
     <div className={css.wrapper}>
       <div className={css.progress}>
@@ -103,16 +127,63 @@ const Training = () => {
         <div className={css.blockWrapper}>
           <div className={css.uaBlock}>
             <div className={css.inputWrapper}>
-              <div>
-                <p className={css.taskWord}>
-                  {tasks.length > 0 && tasks[inx].task === "ua"
-                    ? tasks[inx]?.en
-                    : tasks[inx]?.ua}
-                </p>
+              <div className={css.textareaWrapper}>
+                {tasks[inx].task === "en" && (
+                  <>
+                    <Controller
+                      name="en"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          type="text"
+                          {...field}
+                          className={css.input}
+                          placeholder="Введіть переклад"
+                        />
+                      )}
+                    />
+                    {errors && (
+                      <span className={css.errormessage}>
+                        {errors.en?.message}
+                      </span>
+                    )}
+                  </>
+                )}
+                {tasks[inx].task === "ua" && (
+                  <>
+                    <Controller
+                      name="ua"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          type="text"
+                          {...field}
+                          className={css.input}
+                          placeholder="Введіть переклад"
+                        />
+                      )}
+                    />
+                    {errors && (
+                      <span className={css.errormessage}>
+                        {errors.ua?.message}
+                      </span>
+                    )}
+                  </>
+                )}
               </div>
+
               <div className={css.labelWrapper}>
-                <img src={imgUa} alt="Word" />
-                <span>Ukrainian</span>
+                {tasks[inx].task === "ua" ? (
+                  <>
+                    <img src={imgUa} alt="Word" />
+                    <span>Ukrainian</span>
+                  </>
+                ) : (
+                  <>
+                    <img src={imgUk} alt="Word" />
+                    <span>English</span>
+                  </>
+                )}
               </div>
             </div>
             {answers.length !== tasks.length && (
@@ -124,23 +195,25 @@ const Training = () => {
           </div>
           <div className={css.enBlock}>
             <div className={css.inputWrapper}>
-              <div className={css.textareaWrapper}>
-                <Controller
-                  name="answerWord"
-                  control={control}
-                  render={({ field }) => (
-                    <input type="text" {...field} className={css.input} />
-                  )}
-                />
-                {errors && (
-                  <span className={css.errormessage}>
-                    {errors.answerWord?.message}
-                  </span>
-                )}
+              <div>
+                <p className={css.taskWord}>
+                  {tasks.length > 0 && tasks[inx].task === "ua"
+                    ? tasks[inx]?.en
+                    : tasks[inx]?.ua}
+                </p>
               </div>
               <div className={css.labelWrapper}>
-                <img src={imgUk} alt="Word" />
-                <span>English</span>
+                {tasks[inx].task === "en" ? (
+                  <>
+                    <img src={imgUa} alt="Word" />
+                    <span>Ukrainian</span>
+                  </>
+                ) : (
+                  <>
+                    <img src={imgUk} alt="Word" />
+                    <span>English</span>
+                  </>
+                )}
               </div>
             </div>
           </div>

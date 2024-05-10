@@ -26,12 +26,14 @@ const Dashboard: FC<IProps> = ({ isAddWord = false }) => {
     setKeyword,
     setPage,
     setIsIrregular,
+    trainingCount,
   } = useWords((state) => ({
     categories: state.categories,
     category: state.category,
     isIrregular: state.isIrregular,
     page: state.page,
     keyword: state.keyword,
+    trainingCount: state.trainingCount,
     getWordsCategories: state.getWordsCategories,
     setWordsCategory: state.setWordsCategory,
     setIsIrregular: state.setIsIrregular,
@@ -79,14 +81,14 @@ const Dashboard: FC<IProps> = ({ isAddWord = false }) => {
               )}
             />
             <button type="submit" className={css.btnSearch}>
-              <img src={search} alt="ShowPassword" />
+              <img src={search} alt="Search" />
             </button>
           </form>
         </div>
         <div className={css.dropdounWrapper}>
           <Dropdown
-            items={categories || []}
-            defaultSelect="verb"
+            items={["all", ...(categories || [])]}
+            defaultSelect={category}
             onSelect={handleSelect}
           />
         </div>
@@ -121,7 +123,7 @@ const Dashboard: FC<IProps> = ({ isAddWord = false }) => {
       </div>
 
       <div className={css.wrapperBtn}>
-        To study: <span className={css.stadyCount}>20</span>
+        To study: <span className={css.stadyCount}>{trainingCount}</span>
         {isAddWord && (
           <button className={css.btn} onClick={() => setShowEditModal(true)}>
             Add word

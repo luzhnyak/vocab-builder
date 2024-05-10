@@ -7,6 +7,7 @@ import {
   currentUser,
   getAllWords,
   getOwnWords,
+  getStatistics,
   getTasks,
   getWordsCategories,
   logout,
@@ -128,6 +129,8 @@ interface WordsState {
   ownWords: { results: IWord[]; totalPages: number } | null;
   tasks: Answer[];
   result: Result[];
+  trainingCount: number;
+  setTrainingCount: () => void;
   setWordsCategory: (category: string) => void;
   setIsIrregular: (isIrregular: boolean) => void;
   setKeyword: (keyword: string) => void;
@@ -144,7 +147,7 @@ export const useWords = create<WordsState>()(
   devtools(
     (set) => ({
       categories: null,
-      category: "verb",
+      category: "all",
       keyword: null,
       page: 1,
       refresh: true,
@@ -153,6 +156,11 @@ export const useWords = create<WordsState>()(
       ownWords: null,
       tasks: [],
       result: [],
+      trainingCount: 0,
+      setTrainingCount: async () => {
+        const { totalCount } = await getStatistics();
+        set(() => ({ trainingCount: totalCount }));
+      },
       setWordsCategory: async (category) => {
         set(() => ({ category: category }));
       },

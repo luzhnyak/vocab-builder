@@ -56,7 +56,12 @@ const LoginForm: FC = () => {
             name="email"
             control={control}
             render={({ field }) => (
-              <input type="text" {...field} className={css.input} />
+              <input
+                type="text"
+                {...field}
+                className={css.input}
+                placeholder="Email"
+              />
             )}
           />
           {errors && (
@@ -68,7 +73,12 @@ const LoginForm: FC = () => {
             name="password"
             control={control}
             render={({ field }) => (
-              <input type="text" {...field} className={css.input} />
+              <input
+                type="text"
+                {...field}
+                className={css.input}
+                placeholder="Password"
+              />
             )}
           />
           {errors && (
