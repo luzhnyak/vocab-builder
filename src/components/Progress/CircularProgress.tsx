@@ -67,7 +67,7 @@ const CircularProgress: FC<IProps> = ({
           fontSize="18"
           fill="#000000"
         >
-          {text || progress}
+          {text || progress}%
         </text>
       )}
     </svg>
